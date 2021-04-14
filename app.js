@@ -125,22 +125,15 @@ app.get("/submit", function (req, res) {
 app.post("/submit", function (req, res) {
     const submittedSecret = req.body.secret;
     User.findById(req.user, function (err, foundUser) {
-        console.log("==");
-        console.log(req.user);
-        console.log(req.user.id);
         if (err) {
             console.log(err);
         } else {
-            console.log("1");
             console.log(foundUser);
             if (foundUser) {
-                console.log("2");
                 foundUser.secret = submittedSecret;
-                console.log("3");
+
                 foundUser.save(function () {
-                    console.log("4");
                     res.redirect("/secrets");
-                    console.log("5");
                 });
             }
         }
